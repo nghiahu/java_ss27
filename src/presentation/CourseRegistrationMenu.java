@@ -1,8 +1,14 @@
 package presentation;
 
+import business.BusinessRegistration;
+import entity.CourseRegistration;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CourseRegistrationMenu {
+    public static List<CourseRegistration> courseRegistrationList = new ArrayList<CourseRegistration>();
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean Exit = false;
@@ -17,12 +23,16 @@ public class CourseRegistrationMenu {
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                    BusinessRegistration.addNewRegistration(scanner);
                     break;
                 case 2:
+                    BusinessRegistration.unsubscribe(scanner);
                     break;
                 case 3:
+                    BusinessRegistration.subscribe(scanner);
                     break;
                 case 4:
+                    BusinessRegistration.displayRegistration();
                     break;
                 case 5:
                     Exit = true;

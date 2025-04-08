@@ -1,5 +1,8 @@
 package entity;
 
+import presentation.CourseMenu;
+import presentation.StudentMenu;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -14,6 +17,7 @@ public class CourseRegistration implements IApp{
 
     public CourseRegistration() {
         this.crid = ++idSequence;
+        this.status = CourseStatus.PENDING;
     }
 
     public CourseRegistration(String studentId, String courseId, LocalDate registrationDate, CourseStatus status) {
@@ -62,6 +66,42 @@ public class CourseRegistration implements IApp{
 
     @Override
     public void inputData(Scanner scanner) {
-
+        while(true){
+            System.out.println("Nhập vào mã sinh viên đăng ký: ");
+            String input = scanner.nextLine();
+            boolean found = false;
+            for (Student student : StudentMenu.studentList) {
+                if (student.getStudentId().equals(input)) {
+                    this.studentId = student.getStudentId();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                System.out.println("Không tìm thấy sinh viên!");
+            }else {
+                break;
+            }
+        }
+        while(true){
+            System.out.println("Nhập vào mã khóa học đăng ký: ");
+            String input = scanner.nextLine();
+            boolean found = false;
+            for (Course course : CourseMenu.courseList) {
+                if (course.getCourseId().equals(input)) {
+                    this.courseId = course.getCourseId();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                System.out.println("Không tìm thấy khóa học viên!");
+            }else {
+                break;
+            }
+        }
+    }
+    public void displayRegistration(){
+        System.out.println("Mã đăng ký: " + crid + " - Mã sinh viên: " + studentId + " - Mã khóa học: " + courseId + " - Ngày đăng ký: "+ registrationDate + "Trạng thái: " + status);
     }
 }

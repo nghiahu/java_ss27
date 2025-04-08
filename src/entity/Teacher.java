@@ -1,5 +1,7 @@
 package entity;
 
+import util.validate;
+
 import java.util.Scanner;
 
 public class Teacher extends Person implements IApp{
@@ -30,13 +32,20 @@ public class Teacher extends Person implements IApp{
     }
 
     @Override
-    public void inputData(Scanner scanner) {
+    public void inputData(Scanner scanner) throws Exception {
+        super.inputData(scanner);
         while (true){
             try {
-
+                this.subject = validate.validateString(scanner,0,255,"Nhập vào chuyên môn giảng viên: ");
+                break;
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
         }
+    }
+    public void displayData(){
+        super.displayData();
+        System.out.println("Mã giảng viên: " + this.teacherId + " - Chuyên môn: " + this.subject);
+        System.out.println("--------------------------------------------------------------------");
     }
 }

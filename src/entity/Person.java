@@ -1,12 +1,17 @@
 package entity;
 
+import util.validate;
+import util.validatePerson;
+
+import java.util.Scanner;
+
 public class Person {
     private String name;
     private int age;
     private String address;
     private String phone;
     private String email;
-    public enum Gender {MAIL, FEMALE, OTHER};
+    public enum Gender {MALE, FEMALE, OTHER};
     private Gender sex;
 
     public Person() {
@@ -67,5 +72,58 @@ public class Person {
 
     public void setSex(Gender sex) {
         this.sex = sex;
+    }
+    public void inputData(Scanner scanner) throws Exception {
+        while (true){
+            try {
+                this.name = validate.validateString(scanner,0,150,"Nhập vào tên: ");
+                break;
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        while (true){
+            try {
+                this.age = validate.validateInt(scanner,18,"Nhập vào tuổi: ");
+                scanner.nextLine();
+                break;
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        while (true){
+            try {
+                this.address = validate.validateString(scanner,0,255,"Nhập địa chỉ: ");
+                break;
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        while (true){
+            try {
+                this.phone = validatePerson.validatePhone(scanner);
+                break;
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        while (true){
+            try {
+                this.email = validatePerson.validateEmail(scanner);
+                break;
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        try {
+            this.sex = validatePerson.validateGender(scanner);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public void displayData(){
+        System.out.println("Tên: " + this.name + " - Tuổi " + this.age + " - Địa chỉ: " + this.address + " - Số điện thoại " + this.phone);
+        System.out.println("Email: " + this.email);
+        System.out.println("Giới tính: "  + this.sex);
     }
 }

@@ -15,7 +15,12 @@ public class UniversityManager {
             System.out.println("6. Thống kê");
             System.out.println("7. Thoát");
             System.out.print("Lựa chọn: ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            }catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
             switch (choice) {
                 case 1:
                     CourseMenu.main(args);

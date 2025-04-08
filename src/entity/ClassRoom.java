@@ -1,5 +1,10 @@
 package entity;
 
+import util.validate;
+import util.validateClass;
+import util.validateCourse;
+import util.validateStudent;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -83,6 +88,21 @@ public class ClassRoom implements IApp{
 
     @Override
     public void inputData(Scanner scanner) {
-
+        while (true){
+            try {
+                this.classRoomName = validateClass.validateClassName(scanner);
+                break;
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        while (true) {
+            try {
+                this.courseId = validateCourse.validateId(scanner);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

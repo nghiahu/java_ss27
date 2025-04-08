@@ -1,7 +1,11 @@
 package util;
 
 import entity.Course;
+import entity.Student;
+import entity.Teacher;
+import presentation.TearcherMenu;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static presentation.CourseMenu.courseList;
@@ -48,4 +52,21 @@ public class validateCourse {
             return name;
         }
     }
+    public static int validateTeacherId(Scanner scanner) throws Exception {
+        boolean found = false;
+        System.out.print("Nhập vào mã giảng viên: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        for(Teacher teacher : TearcherMenu.teacherList){
+            if(teacher.getTeacherId() == id){
+                found = true;
+                break;
+            }
+        }
+        if(!found){
+            throw new Exception("Không tìm thấy giảng viên");
+        }else {
+            return id;
+        }
+    }
+
 }
